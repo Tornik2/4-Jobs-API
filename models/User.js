@@ -37,7 +37,7 @@ UserSchema.methods.getToken = function() {
         user: this.name,
         id: this._id 
     }
-    const token = jwt.sign(payload, secretKey, {
+    const token = jwt.sign(payload, process.env.SECRET_JWT, {
       expiresIn: process.env.JWT_LIFETIME,
     })
     return token
