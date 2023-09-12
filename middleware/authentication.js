@@ -1,7 +1,7 @@
 const { BadRequestError, UnauthenticatedError } = require("../errors")
 const jwt = require('jsonwebtoken')
 
-const auth = async (req, res) => {
+const auth = async (req, res, next) => {
     const header = req.headers.authorization
     if(!header || !header.startsWith('Bearer')) {
         throw new BadRequestError('not authorized')
@@ -13,7 +13,7 @@ const auth = async (req, res) => {
 
     try {
         const decoded = await jwt.verify(token, process.env.SECRET_JWT)
-        res.json({decoded})
+        req.user = { userId: decoded.id, name: decoded.user }
         next()
     } catch (error) {
         throw new UnauthenticatedError('invalid tokensssss')

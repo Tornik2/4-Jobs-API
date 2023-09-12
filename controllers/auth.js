@@ -20,7 +20,7 @@ const login = async (req, res) => {
     }
     const isPasswordCorrect = await user.checkPasswords(password)
     if (isPasswordCorrect === false) {
-        throw new UnauthenticatedError('Invalid Credentials')
+        throw new UnauthenticatedError('Invalid Credentials, but becaouse of password')
     }
     
     const token =  user.getToken()
