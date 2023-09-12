@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
         req.user = { userId: decoded.id, name: decoded.user }
         next()
     } catch (error) {
-        throw new UnauthenticatedError('invalid tokensssss')
+        throw new UnauthenticatedError('Authentication failed, invalid token')
     }
 }
 
