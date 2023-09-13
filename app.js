@@ -3,7 +3,7 @@ require('express-async-errors');
 
 // swagger
 const swagger = require('swagger-ui-express')
-const YAml = require('yamljs')
+const YAML = require('yamljs')
 const swaggerDocument = YAML.load('./swagger.yaml')
 
 //extra security
@@ -40,7 +40,7 @@ app.get('/', (req, res)=> {
   res.send('<h1>Jobs API</<h1><a href="api-docs"> Docuumentation</a>')
 })
 
-app.use('/api-docs', swagger.serve, swaggerDocument)
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerDocument))
 app.use('/api/v1/jobs', auth, jobsRouter);
 app.use('/api/v1/auth', authRouter);
 
